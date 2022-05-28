@@ -2,41 +2,41 @@ var express = require('express');
 var router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
-    /* GET users listing. */
+    /* GET categories listing. */
 router.get('/', async function(req, res, next) {
     let skip = req.query.skip
     let take = req.query.take
-    let users = await prisma.user.findMany()
+    let categories = await prisma.categorie.findMany()
     skip = skip || 0
     take = take || 10
-    const u = [...users]
+    const u = [...categories]
     res.send(u.splice(skip, take));
 });
-/* GET user by id. */
+/* GET categorie by id. */
 router.get('/:id', async function(req, res, next) {
-    const user = await prisma.user.findUnique({
+    const categorie = await prisma.categorie.findUnique({
         where: {
             id: +req.params.id
         }
     })
 
-    if (user != {}) {
+    if (categorie != {}) {
         res.status(200)
-        res.send(user);
+        res.send(categorie);
     } else {
         res.status(404)
         res.send({})
     }
 
 });
-/* POSt add user. */
+/* POSt add categorie. */
 router.post('/', async function(req, res, next) {
     try {
-        const user = await prisma.user.create({
+        const categorie = await prisma.categorie.create({
             data: req.body
         })
         res.status(200)
-        res.send(user)
+        res.send(categorie)
     } catch (e) {
 
         console.log(
@@ -46,20 +46,20 @@ router.post('/', async function(req, res, next) {
     }
 
 });
-/* PAtCH update user. */
+/* PAtCH update categorie. */
 router.patch('/', async function(req, res, next) {
 
-    const user = await prisma.user.update({
+    const categorie = await prisma.categorie.update({
         where: { id: +req.body.id },
         data: req.body,
     })
     res.status(201)
-    res.send(user)
+    res.send(categorie)
 });
-/* delete user with id . */
+/* delete categorie with id . */
 router.delete('/:id', async function(req, res, next) {
     try {
-        const u = await prisma.user.delete({
+        const u = await prisma.categorie.delete({
             where: { id: +req.params.id },
         })
         res.status(204)
@@ -67,7 +67,7 @@ router.delete('/:id', async function(req, res, next) {
     } catch (e) {
 
         console.log(
-            'There is no user here with this id !!'
+            'There is no categorie here with this id !!'
         )
         throw e
     }
