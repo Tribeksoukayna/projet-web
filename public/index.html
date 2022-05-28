@@ -1,13 +1,59 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/darkly/bootstrap.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row articles"></div>
 
-<head>
-  <title>Express</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+      <div id="template" style="display: none">
+        <div class="card">
+          <img src="https://picsum.photos/400/300" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <button class="btn btn-primary">More ...</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
-</body>
+    <script src="jquery.js"></script>
+    <script>
+      const url ="http://localhost:3000/articles?skip=0&take=10";
 
+      $articlesContainer = $(".container > .articles");
+
+      function show(data) {
+        console.log(data)
+        const $card = $("#template > .card ");
+        data.forEach((e) => {
+          const $col = $('<div class = "col-md-4"></div>');
+          const $clone = $card.clone(true);
+
+          const src = $("img", $clone).attr("src");
+
+          $("img", $clone).attr('src',src + '?' + e.id)
+          $(".card-title", $clone).text(e.title);
+          $(".card-text", $clone).text(e.content);
+
+          //$(".button", $clone).text(e.body);
+
+          $col.append($clone).appendTo($articlesContainer);
+        });
+      }
+      $.getJSON(url).then(show);
+    </script>
+  </body>
 </html>
