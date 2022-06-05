@@ -14,9 +14,9 @@ router.get('/', async function(req, res, next) {
 });
 /* GET commentaire by id. */
 router.get('/:id', async function(req, res, next) {
-    const commentaire = await prisma.commentaire.findUnique({
+    const commentaire = await prisma.commentaire.findMany({
         where: {
-            id: +req.params.id
+            postId: +req.params.id
         }
     })
 
@@ -33,15 +33,17 @@ router.get('/:id', async function(req, res, next) {
 router.post('/', async function(req, res, next) {
     try {
         const commentaire = await prisma.commentaire.create({
-            data: req.body
+            data: {
+                comment: req.body.comment,
+                postId: +req.body.postId,
+                writtenById: +req.body.writtenById
+            }
         })
         res.status(200)
         res.send(commentaire)
     } catch (e) {
 
-        console.log(
-            'email already exist !!'
-        )
+
         throw e
     }
 

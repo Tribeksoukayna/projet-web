@@ -97,11 +97,10 @@
             <div class="card-body">
               <h5 class="card-title details">Card title</h5>
               <p class="card-text content_cont">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a class="btn btn-primary text-white" onclick="add()">add Coment</a>
+              
             </div>
           </div>
      </div>
-
 
      <div class="soukayna">
 
@@ -179,9 +178,6 @@
         </div>
     </div>
     <!--/-->
-
-
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/popper.min.js"></script>
@@ -195,55 +191,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <!-- JS main  -->
     <script src="assets/js/main.js"></script>
-    <script>
-        const url = "http://localhost:3000/articles?skip=0&take=10";
-
-        $articlesContainer = $(".cntn > .articles");
-        //$loginLayouts = $(".login-layout ");
-
-        function show(data) {
-            const $card = $(".template > .post-card ");
-            data.forEach((e) => {
-                const $col = $('<div class = "col-lg-3 col-md-3 articlesDiv"></div>');
-                const $clone = $card.clone(true);
-                const src = $("img", $clone).attr("src");
-                $("#img", $clone).attr('src', e.image + '?'+e.id)
-                $(".title", $clone).text(e.title);
-                let s=e.content
-                $(".content", $clone).text(s);
-                $(".cat", $clone).text(e.categorId);
-                $a=$(`<a class="btn btn-primary text-white idDetails" onclick="coment(${e.id})">Voir Plus ...</a>`)
-                 $clone.append($a)           
-                $col.append($clone).appendTo($articlesContainer);
-            });
-        }
-        $.getJSON(url).then(show);
-        
-        function coment(id){
-
-        
-            const url = "http://localhost:3000/articles/"+id;
-            $.getJSON(url).then(comentDetails);
-            
-        }
-       function comentDetails(e){
-        $(".articles").hide()
-            $soukayna=$(".soukayna")
-            
-            const $card = $(".template-show > .card ");
-            const $col = $('<div class = "col-lg-12S col-md-12 articlesDetails"></div>');
-            const $clone = $card.clone(true);
-            $(".idDetails", $clone).attr('id', e.id)
-            $("#imgimg", $clone).attr('src', e.image + '?' + e.id)
-            $(".details", $clone).text(e.title);
-            $(".content_cont", $clone).text(e.content);
-            $col.append($clone).appendTo($soukayna);
-            
-
-       }
-       
-    </script>
-
+    <script src="jss/script.js"></script>
+    
 </body>
 
 </html>
