@@ -218,11 +218,10 @@
             });
         }
         $.getJSON(url).then(show);
-        // login
+        
         function coment(id){
 
-            
-            console.log(id)
+        
             const url = "http://localhost:3000/articles/"+id;
             $.getJSON(url).then(comentDetails);
             
