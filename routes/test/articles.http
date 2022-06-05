@@ -1,6 +1,6 @@
 
 ### Get all articles
-GET http://localhost:3000/article
+GET http://localhost:3000/articles
 
 ### Get articles by Id
 GET http://localhost:3000/article/48

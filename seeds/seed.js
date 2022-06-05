@@ -41,7 +41,7 @@ const getRandomUser = async() => {
 const fakerArticles = async() => ({
     title: faker.lorem.sentence(),
     content: faker.lorem.paragraph(),
-    image: faker.image.imageUrl(),
+    image: faker.image.city(),
     published: true,
     authorId: (await getRandomUser()).id,
     categorId: (await getRandomCategory()).name,
@@ -72,7 +72,7 @@ async function main() {
     /// --------- Categories ---------------
 
     for (let i = 0; i < fakerCategoriesRounds; i++) {
-        await prisma.categorie.create({ data: { name: faker.word.adverb(6) } })
+        await prisma.categorie.create({ data: { name: faker.word.adjective(10) } })
     }
 
 
